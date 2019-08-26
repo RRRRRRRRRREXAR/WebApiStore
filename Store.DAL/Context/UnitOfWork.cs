@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity;
 
 namespace Store.DAL.Context
 {
@@ -17,6 +18,7 @@ namespace Store.DAL.Context
         private EFRepository<UserRoles> rolesRepository;
         private EFRepository<Order> ordersRepository;
         private StoreContext db;
+
         
         public UnitOfWork()
         {
