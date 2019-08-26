@@ -23,6 +23,7 @@ namespace WebPL
             var container = new UnityContainer();
             container.RegisterType<IUnitOfWork,UnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IProductService, ProductService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IAdminService, AdminService>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             // Конфигурация и службы Web API
             // Настройка Web API для использования только проверки подлинности посредством маркера-носителя.

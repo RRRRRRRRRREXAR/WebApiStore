@@ -12,36 +12,44 @@ namespace WebPL.Controllers
     public class ProductController : ApiController
     {
         // GET: api/Product
-        IProductService service;
+        IProductService ProductService;
+        IAdminService AdminService;
        
-        public ProductController(IProductService service)
+        public ProductController(IProductService service,IAdminService adminService)
         {
-            this.service = service;
+            this.ProductService = service;
+            this.AdminService = adminService;
         }
         public IEnumerable<ProductDTO> Get()
         {
-            return service.GetAllProducts().ToList();
+            return ProductService.GetAllProducts().ToList();
         }
 
         // GET: api/Product/5
-        public string Get(int id)
+        public object Get(int id)
         {
-            return "value";
+            return Ok(ProductService.GetProduct(id));
         }
 
+        [Authorize(Roles ="admin")]
         // POST: api/Product
-        public void Post([FromBody]string value)
+        public void Post([FromBody]ProductDTO value)
         {
+            AdminService.CreateProduct(value);
         }
 
-        // PUT: api/Product/5
-        public void Put(int id, [FromBody]string value)
+        [Authorize(Roles = "admin")]
+        // PUT: api/Product
+        public void Put([FromBody]ProductDTO value)
         {
+            AdminService.UpdateProduct(value);
         }
 
+        [Authorize(Roles = "admin")]
         // DELETE: api/Product/5
         public void Delete(int id)
         {
+            AdminService.DeleteProduct(id);
         }
     }
 }

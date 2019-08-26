@@ -61,7 +61,7 @@ namespace Store.BLL.Services
             return new ProductDTO { Id= product.Id, Category=tempCategory, Description=product.Description, Name=product.Name, Price=product.Price};
         }
 
-        public IEnumerable GetCategories()
+        public IEnumerable<ProductCategoryDTO> GetCategories()
         {
             var Categories = uow.Categories.GetAll();
             List<ProductCategoryDTO> productCategories = new List<ProductCategoryDTO>();

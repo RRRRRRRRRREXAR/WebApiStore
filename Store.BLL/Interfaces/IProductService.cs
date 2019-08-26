@@ -14,7 +14,7 @@ namespace Store.BLL.Interfaces
         ProductDTO GetProduct(int id);
         ProductDTO FindProduct(ProductDTO product);
         ProductCategoryDTO GetCategory(int id);
-        IEnumerable GetCategories();
+        IEnumerable<ProductCategoryDTO> GetCategories();
         /// <summary>
         /// Создание заказа
         /// </summary>

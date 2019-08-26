@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
+using WebPL.Models;
 
 namespace WebPL
 {
@@ -20,8 +21,14 @@ namespace WebPL
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
-            
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("json", "true", "application/json"));
+
+        }
+        protected void Session_Start()
+        {
+            Guid g = Guid.NewGuid();
+            Session["SessionId"] = g.ToString();
+            SessionServer.Cart[Session["SessionId"].ToString()] = new 
         }
     }
 }
