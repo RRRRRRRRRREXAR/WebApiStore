@@ -23,12 +23,13 @@ namespace WebPL
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("json", "true", "application/json"));
 
+
         }
         protected void Session_Start()
         {
             Guid g = Guid.NewGuid();
             Session["SessionId"] = g.ToString();
-            SessionServer.Cart[Session["SessionId"].ToString()] = new 
+            //SessionServer.Cart[Session["SessionId"].ToString()] = new 
         }
     }
 }

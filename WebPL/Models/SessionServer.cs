@@ -9,5 +9,6 @@ namespace WebPL.Models
 {
     public static class SessionServer
     {
-        public static ConcurrentDictionary<string, List<ProductDTO>> Cart = new ConcurrentDictionary<string, List<ProductDTO>>();
+        public static ConcurrentDictionary<string, List<ProductViewModel>> Cart = new ConcurrentDictionary<string, List<ProductViewModel>>();
+    }
 }
