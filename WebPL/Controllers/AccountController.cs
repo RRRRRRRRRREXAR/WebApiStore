@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -19,7 +20,8 @@ using WebPL.Results;
 
 namespace WebPL.Controllers
 {
-    [Authorize]
+    //[EnableCors(origins: "https://localhost:4200", headers: "*", methods: "*")]
+   // [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {

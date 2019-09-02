@@ -82,6 +82,7 @@ namespace Store.BLL.Services
             Order ord = new Order { Products = new List<Product>(), ShippingAdress = order.ShippingAdress, UserId = order.UserId };
             ord.Products = prd;
             uow.Orders.Create(ord);
+            uow.Save();
             Emailer em = new Emailer();
             em.SentOrder(user,order);
 

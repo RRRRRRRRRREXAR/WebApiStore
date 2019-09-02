@@ -37,6 +37,7 @@ namespace Store.BLL.Services
                 throw new ValidationException("Пользователь с введенной почтой уже зарегистрирован","");
             }
             uow.Users.Create(new User { Email=user.Email, FirstName=user.FirstName, LastName=user.LastName, Password=user.Password});
+            uow.Save();
         }
 
         public IEnumerable<UserRoleDTO> GetRoles()

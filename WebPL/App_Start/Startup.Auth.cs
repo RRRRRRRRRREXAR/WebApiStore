@@ -10,9 +10,11 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using WebPL.Providers;
 using WebPL.Models;
+using System.Web.Http.Cors;
 
 namespace WebPL
 {
+    [EnableCors(origins: "https://localhost:4200", headers: "*", methods: "*")]
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }

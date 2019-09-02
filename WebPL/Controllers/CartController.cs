@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebPL.Models;
 
 namespace WebPL.Controllers
@@ -12,6 +13,7 @@ namespace WebPL.Controllers
     public class CartController : ApiController
     {
         // GET api/<controller>
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public IEnumerable<ProductViewModel> Get(string sessionId)
         {
             return SessionServer.Cart[sessionId];

@@ -35,13 +35,11 @@ namespace Store.DAL.Repositories
             public void Create(T item)
             {
                 _dbSet.Add(item);
-                db.SaveChanges();
             }
 
             public void Update(T item)
             {
                 db.Set<T>().AddOrUpdate(item);
-                db.SaveChanges();
             }
 
             public IEnumerable<T> Find(Func<T, Boolean> predicate)
@@ -55,7 +53,6 @@ namespace Store.DAL.Repositories
                 if (item != null)
                 {
                     _dbSet.Remove(item);
-                    db.SaveChanges();
                 }
 
             }

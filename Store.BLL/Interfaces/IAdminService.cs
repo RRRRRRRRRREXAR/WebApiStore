@@ -15,10 +15,7 @@ namespace Store.BLL.Interfaces
         void CreateCategory(ProductCategoryDTO category);
         void UpdateCategory(ProductCategoryDTO category);
         void DeleteCategory(ProductCategoryDTO category);
-        List<ProductCategoryDTO> GetCategories();
-        ProductCategoryDTO GetCategory(int id);
-        List<ProductDTO> GetProducts();
-        ProductDTO GetProduct(int id);
+
         void Dispose();
     }
 }

@@ -21,7 +21,8 @@ namespace WebPL
     {
         public static void Register(HttpConfiguration config)
         {
-            
+            var cors = new EnableCorsAttribute("https://localhost:4200", "*", "*");
+            config.EnableCors(cors);
             var container = new UnityContainer();
             container.RegisterType<IUnitOfWork,UnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IProductService, ProductService>(new HierarchicalLifetimeManager());
@@ -41,14 +42,11 @@ namespace WebPL
 
             // Маршруты Web API
             config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional } 
             );
-            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
-            config.EnableCors(cors);
         }
     }
 }
