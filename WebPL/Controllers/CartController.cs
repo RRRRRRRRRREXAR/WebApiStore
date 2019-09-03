@@ -14,14 +14,16 @@ namespace WebPL.Controllers
     {
         // GET api/<controller>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public IEnumerable<ProductViewModel> Get(string sessionId)
+        public IEnumerable<ProductViewModel> Get(string token)
         {
-            return SessionServer.Cart[sessionId];
+            CreateNewCart(token);
+            return SessionServer.Cart[token];
         }
-            
+        
         // POST api/<controller>
-        public IHttpActionResult Post([FromBody]ProductViewModel value)
+        public IHttpActionResult Post([FromBody]ProductViewModel value,string token)
         {
+            token = CreateNewCart(token); 
             SessionServer.Cart[value.SessionId].Add(value);
             return Ok();
         }
@@ -29,10 +31,24 @@ namespace WebPL.Controllers
       
 
         // DELETE api/<controller>/5
-        public IHttpActionResult Delete(string sessionId,int id)
+        public IHttpActionResult Delete(string token,int id)
         {
-            SessionServer.Cart[sessionId].RemoveAt(id);
+            token= CreateNewCart(token);
+            SessionServer.Cart[token].RemoveAt(id);
             return Ok();
+        }
+        private string CreateNewCart(string token)
+        {
+            if (token == null)
+            {
+                Guid g = Guid.NewGuid();
+                SessionServer.Cart[g.ToString()] = new List<ProductViewModel>();
+                return g.ToString();
+            }
+            else
+            {
+                return token;
+            }
         }
     }
 }

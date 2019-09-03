@@ -34,6 +34,7 @@ namespace WebPL.Controllers
         }
 
         // POST api/<controller>
+        [Authorize(Roles = "admin")]
         public IHttpActionResult Post([FromBody]ProductCategoryDTO value)
         {
             adminService.CreateCategory(value);
@@ -41,11 +42,13 @@ namespace WebPL.Controllers
         }
 
         // PUT api/<controller>/5
+        [Authorize(Roles = "admin")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/<controller>/5
+        [Authorize(Roles = "admin")]
         public void Delete(int id)
         {
         }

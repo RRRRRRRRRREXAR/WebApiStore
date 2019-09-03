@@ -27,9 +27,7 @@ namespace WebPL
         }
         protected void Session_Start()
         {
-            Guid g = Guid.NewGuid();
-            Session["SessionId"] = g.ToString();
-            //SessionServer.Cart[Session["SessionId"].ToString()] = new 
+           
         }
     }
 }
