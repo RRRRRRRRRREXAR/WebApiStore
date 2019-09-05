@@ -13,6 +13,5 @@ namespace WebPL.Models
         public string Description { get; set; }
         public CategoryViewModel Category { get; set; }
 
-        public string SessionId { get; set; }
     }
 }

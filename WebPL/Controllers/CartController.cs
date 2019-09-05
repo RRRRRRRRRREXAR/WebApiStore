@@ -1,4 +1,5 @@
 ﻿using Store.BLL.DTO;
+using Store.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,28 @@ namespace WebPL.Controllers
 {
     public class CartController : ApiController
     {
+        private IProductService service;
         // GET api/<controller>
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public CartController(IProductService service)
+        {
+            this.service = service;
+        }
         public IEnumerable<ProductViewModel> Get(string token)
         {
-            CreateNewCart(token);
             return SessionServer.Cart[token];
         }
-        
-        // POST api/<controller>
-        public IHttpActionResult Post([FromBody]ProductViewModel value,string token)
+        public string Get()
         {
-            token = CreateNewCart(token); 
-            SessionServer.Cart[value.SessionId].Add(value);
+            Guid g = Guid.NewGuid();
+            SessionServer.Cart[g.ToString()] = new List<ProductViewModel>();
+            return g.ToString();
+        }
+        // POST api/<controller>
+        public IHttpActionResult Post([FromBody]Test test)
+        {
+            var addedProduct= service.GetProduct(test.Id);
+            ProductViewModel pr = new ProductViewModel { Id = addedProduct.Id, Category = new CategoryViewModel { Id = addedProduct.Category.Id, Name = addedProduct.Name }, Description = addedProduct.Description, Name = addedProduct.Name, Price = addedProduct.Price };
+            SessionServer.Cart[test.Token].Add(pr);
             return Ok();
         }
 
@@ -33,22 +43,17 @@ namespace WebPL.Controllers
         // DELETE api/<controller>/5
         public IHttpActionResult Delete(string token,int id)
         {
-            token= CreateNewCart(token);
+            
             SessionServer.Cart[token].RemoveAt(id);
             return Ok();
         }
-        private string CreateNewCart(string token)
-        {
-            if (token == null)
-            {
-                Guid g = Guid.NewGuid();
-                SessionServer.Cart[g.ToString()] = new List<ProductViewModel>();
-                return g.ToString();
-            }
-            else
-            {
-                return token;
-            }
-        }
+        
+    }
+
+   public class Test
+    {
+        public int Id { get; set; }
+            
+       public string Token { get; set; }
     }
 }

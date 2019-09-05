@@ -72,7 +72,7 @@ namespace Store.BLL.Services
             return productCategories;
         }
 
-        public void MakeOrder(UserDTO user,OrderDTO order)
+        public void MakeOrder(OrderDTO order)
         {
             List<Product> prd = new List<Product>();
             foreach (var el in order.Products)
@@ -83,8 +83,8 @@ namespace Store.BLL.Services
             ord.Products = prd;
             uow.Orders.Create(ord);
             uow.Save();
-            Emailer em = new Emailer();
-            em.SentOrder(user,order);
+           // Emailer em = new Emailer();
+            //em.SentOrder(user,order);
 
         }
         public ProductCategoryDTO GetCategory(int id)
