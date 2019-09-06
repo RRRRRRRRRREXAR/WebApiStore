@@ -12,6 +12,7 @@ namespace Store.DAL.Entites
         public int Price { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Order> Orders { get; set; }
         public int CategoryId { get; set; }
     }
 }

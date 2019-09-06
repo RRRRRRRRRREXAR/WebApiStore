@@ -30,7 +30,7 @@ namespace WebPL.Controllers
             return g.ToString();
         }
         // POST api/<controller>
-        public IHttpActionResult Post([FromBody]Test test)
+        public IHttpActionResult Post([FromBody]CartModel test)
         {
             var addedProduct= service.GetProduct(test.Id);
             ProductViewModel pr = new ProductViewModel { Id = addedProduct.Id, Category = new CategoryViewModel { Id = addedProduct.Category.Id, Name = addedProduct.Name }, Description = addedProduct.Description, Name = addedProduct.Name, Price = addedProduct.Price };
@@ -50,10 +50,5 @@ namespace WebPL.Controllers
         
     }
 
-   public class Test
-    {
-        public int Id { get; set; }
-            
-       public string Token { get; set; }
-    }
+   
 }

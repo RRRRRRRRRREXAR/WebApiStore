@@ -19,7 +19,7 @@ namespace Store.BLL.Interfaces
         /// Создание заказа
         /// </summary>
         /// <param name="orderDTO"></param>
-        void MakeOrder(UserDTO user,OrderDTO orderDTO);
+        void MakeOrder(OrderDTO orderDTO);
         void Dispose();
     }
 }

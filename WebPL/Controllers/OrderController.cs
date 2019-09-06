@@ -14,14 +14,24 @@ namespace WebPL.Controllers
     [Authorize]
     public class OrderController : ApiController
     {
-        IProductService productService;
-       
+        public IProductService productService;
+
+        public OrderController(IProductService productService)
+        {
+            this.productService = productService;
+        }
         // GET api/<controller>
-        public IHttpActionResult Post(string token)
+        public IHttpActionResult Post([FromBody]CartModel token)
         {
             OrderDTO order = new OrderDTO();
-            order.Products=
-            productService.MakeOrder(new UserDTO { Email=User. },order);
+            var s = SessionServer.Cart[token.Token];
+            order.Products = new List<ProductDTO>();
+
+            foreach (var el in s)
+            {
+                order.Products.Add(new ProductDTO {Id=el.Id, Description=el.Description, Name=el.Name, Price=el.Price, Category=new ProductCategoryDTO {Id=el.Category.Id,Name=el.Category.Name } });
+            }
+            productService.MakeOrder(order);
             return Ok();
         }
 

@@ -28,7 +28,16 @@ namespace Store.BLL.Services
             var pr = uow.Products.GetAll();
             foreach (var s in pr)
             {
-                products.Add(new ProductDTO { Id = s.Id, Category =  new ProductCategoryDTO {Id = uow.Categories.Get(s.CategoryId).Id, Name= uow.Categories.Get(s.CategoryId).Name }, Description = s.Description, Name = s.Name, Price = s.Price });
+
+                products.Add(new ProductDTO
+                {
+                 Id = s.Id,
+                Category =  new ProductCategoryDTO {Id = uow.Categories.Get(s.CategoryId).Id,
+                Name = uow.Categories.Get(s.CategoryId).Name },
+                Description = s.Description,
+                Name = s.Name,
+                Price = s.Price
+                });
             }
             
             return products;
